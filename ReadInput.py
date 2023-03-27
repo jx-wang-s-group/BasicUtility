@@ -41,7 +41,6 @@ class basic_input(object):
             setattr(self, key, default_value)
             print(f'Using default value for {key}: {default_value}')
 
-
             
 class TrainParamReader(basic_input):
     def __init__(self, input_file:str):
