@@ -34,7 +34,7 @@ class basic_input(object):
             setattr(self, key, yaml_dict[key])
 
 
-    def _use_default_warning(self, key:str, default_value):
+    def __use_default_warning(self, key:str, default_value):
         if hasattr(self, key):
             pass
         else:
@@ -56,27 +56,27 @@ class TrainParamReader(basic_input):
         default_values = {
             'lr': 1e-3,
             'epochs': 1000,
-            'random_seed': 42,
-            'batch_size': 32,
+            'randomSeed': 42,
+            'batchSize': 32,
             'savepath': 'results',
             'optimizer': 'adam',
-            'scheduler_params':{
+            'schedulerParams':{
                 'factor':0.5, 
                 'patience':20, 
                 'cooldown':20, 
-                'min_lr':1e-5
+                'minLr':1e-5
             }
         }
         
         self.lr:float
         self.epochs:int
-        self.random_seed:int
-        self.savepath:str
-        self.scheduler_params:dict
+        self.randomSeed:int
+        self.savePath:str
+        self.schedulerParams:dict
         self.optimizer:str
-        self.batch_size:int
-        self.data_path:str
+        self.batchSize:int
+        self.dataPath:str
         
 
         for key in default_values:
-            self._use_default_warning(key, default_values[key])
+            self.__use_default_warning(key, default_values[key])
