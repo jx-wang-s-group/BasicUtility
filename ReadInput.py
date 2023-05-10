@@ -34,7 +34,7 @@ class basic_input(object):
             setattr(self, key, yaml_dict[key])
 
 
-    def __use_default_warning(self, key:str, default_value):
+    def _use_default_warning(self, key:str, default_value):
         if hasattr(self, key):
             pass
         else:
@@ -79,4 +79,4 @@ class TrainParamReader(basic_input):
         
 
         for key in default_values:
-            self.__use_default_warning(key, default_values[key])
+            self._use_default_warning(key, default_values[key])
