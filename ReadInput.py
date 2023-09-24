@@ -58,7 +58,7 @@ class TrainParamReader(basic_input):
             'epochs': 1000,
             'randomSeed': 42,
             'batchSize': 32,
-            'savepath': 'results',
+            'savePath': 'results',
             'optimizer': 'adam',
             'schedulerParams':{
                 'factor':0.5, 
@@ -80,3 +80,4 @@ class TrainParamReader(basic_input):
 
         for key in default_values:
             self._use_default_warning(key, default_values[key])
+        print('')
