@@ -113,7 +113,7 @@ def createFn(fnName, pkgName: str):
         if "kwargs" in fnName:
             for k in fnName["kwargs"]:
                 if isinstance(fnName["kwargs"][k], dict):
-                    fnName["kwargs"][k] = createFn(fnName["kwargs"][k])
+                    fnName["kwargs"][k] = createFn(fnName["kwargs"][k], pkgName)
             v = getattr(pkgName, fnName["name"])(**fnName["kwargs"])
         else:
             v = getattr(pkgName, fnName["name"])
