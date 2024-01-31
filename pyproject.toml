@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "basicutility"
+version = "0.0.1"
+authors = [
+  { name="Xinyang", email="xliu28@nd.edu" },
+]
+description = "Common utilities (e.g. input parameter reading) for Sci-ML jobs
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: Linux",
+]
+dependencies = [
+    "yaml",
+    "pyyaml",
+]
+
+
+[project.urls]
+Homepage = "https://github.com/jx-wang-s-group/BasicUtility"
+Issues = "https://github.com/jx-wang-s-group/BasicUtility/issues"

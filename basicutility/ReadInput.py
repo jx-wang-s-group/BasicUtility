@@ -58,11 +58,14 @@ class TrainParamReader(basic_input):
             "batchSize": 32,
             "savePath": "results",
             "optimizer": "adam",
-            "schedulerParams": {
-                "factor": 0.5,
-                "patience": 20,
-                "cooldown": 20,
-                "minLr": 1e-5,
+            "scheduler": {
+                "name": "ReduceLROnPlateau",
+                "kwargs": {
+                    "factor": 0.5,
+                    "patience": 20,
+                    "cooldown": 20,
+                    "minLr": 1e-5,
+                }
             },
         }
 
@@ -70,7 +73,7 @@ class TrainParamReader(basic_input):
         self.epochs: int
         self.randomSeed: int
         self.savePath: str
-        self.schedulerParams: dict
+        self.scheduler: dict
         self.optimizer: str
         self.batchSize: int
         self.dataPath: str
@@ -84,15 +87,15 @@ def createFn(fnName, pkgName: str):
     """
     Create nested function/class from a dictionary
     example:
-        to create function/class `foo` from package which has the API: `foo(x, y, z)`
+        to create function/class `fo` from package which has the API: `foo(x, y, z)`
         where `x` is a function/class, which has the API: `fx(a, b)`,
             where `a` is a function/class, which has the API: `fa(alpha)`,
                 where `alpha` is a regular parameter
-        `y` and `z` are regular parameters (the parameters which don't have input)
+        `y` and `z` are regular parameters (the parameters which don't require input)
 
         the yaml file should be like this:
 
-        foo:
+        fo:
             name: foo
             kwargs:
                 x:
@@ -106,7 +109,17 @@ def createFn(fnName, pkgName: str):
                 y: 3
                 z: 4
 
-        assume all the functions are from same package/module
+    ----------
+
+    the above yaml file is equivalent to:
+    >>> fo = foo(
+    >>>     x = fx( 
+    >>>         a = f(a),
+    >>>         b=2
+    >>>     ),
+    >>>     y = 3,
+    >>>     z = 4,
+    >>> )
     """
 
     if isinstance(fnName, dict):
