@@ -8,7 +8,7 @@ version = "0.0.1"
 authors = [
   { name="Xinyang", email="xliu28@nd.edu" },
 ]
-description = "Common utilities (e.g. input parameter reading) for Sci-ML jobs
+description = "Common utilities (e.g. input parameter reading) for Sci-ML jobs"
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
