@@ -16,7 +16,6 @@ classifiers = [
     "Operating System :: Linux",
 ]
 dependencies = [
-    "yaml",
     "pyyaml",
 ]
 
