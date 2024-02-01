@@ -12,22 +12,22 @@ pip install git+https://github.com/jx-wang-s-group/BasicUtility@RELEASE_VERSION
     
     Example: 
 
-        `input.yaml` looks like:
+    `input.yaml` looks like:
 
-            ```yaml
-            data_path: /a/b/c
-            params:
-              nu: 1.e-3
-              mesh_size: [10, 10,]
-            ```
-
-        ```python
-        >>> hyper_params = basic_input("input.yaml")
-        >>> hyper_params.data_path
-        >>> '/a/b/c'
-        >>> hyper_params.params
-        >>> {'nu': 0.001, 'mesh_size': [10, 10]}
+        ```yaml
+        data_path: /a/b/c
+        params:
+          nu: 1.e-3
+          mesh_size: [10, 10,]
         ```
+
+    ```python
+    >>> hyper_params = basic_input("input.yaml")
+    >>> hyper_params.data_path
+    >>> '/a/b/c'
+    >>> hyper_params.params
+    >>> {'nu': 0.001, 'mesh_size': [10, 10]}
+    ```
     
     basic_input.update_defaults(): takes in a dictionary to update the default values. Then default values can be omitted in the yaml file.
 
