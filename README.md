@@ -2,9 +2,8 @@
 Common utilities (e.g. input parameter reading) for Sci-ML jobs
 
 ## Installation
-Replase the RELEASE_VERSION with desired version number (e.g. v0.0.1)
 ```bash
-pip install git+https://github.com/jx-wang-s-group/BasicUtility@RELEASE_VERSION
+pip install git+https://github.com/jx-wang-s-group/BasicUtility
 ```
 
 ## Usage
