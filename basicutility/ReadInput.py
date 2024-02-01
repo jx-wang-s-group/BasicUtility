@@ -17,6 +17,9 @@ def read_yaml(filename: str) -> dict:
 
 
 class basic_input(object):
+    
+    defaults = {}
+
     def __init__(self, input_file: str):
         """
         Load a yaml file and store the entries as attributes of the class
@@ -32,15 +35,21 @@ class basic_input(object):
         for key in yaml_dict:
             setattr(self, key, yaml_dict[key])
 
-    def _use_default_warning(self, key: str, default_value):
-        if hasattr(self, key):
-            pass
-        else:
-            setattr(self, key, default_value)
-            print(f"Using default value for {key}: {default_value}")
+        # set default values
+        for key in self.__class__.defaults:
+            if hasattr(self, key):
+                pass
+            else:
+                setattr(self, key, self.__class__.defaults[key])
+                print(f"Using default value for {key}: {self.__class__.defaults[key]}")
+
+    @classmethod
+    def update_defaults(cls, new_defaults:dict):
+        cls.defaults.update(new_defaults)
 
 
 class TrainParamReader(basic_input):
+        
     def __init__(self, input_file: str):
         """
         Load a yaml file and store the entries as attributes of the class
@@ -51,24 +60,6 @@ class TrainParamReader(basic_input):
         """
         super().__init__(input_file)
 
-        default_values = {
-            "lr": 1e-3,
-            "epochs": 1000,
-            "randomSeed": 42,
-            "batchSize": 32,
-            "savePath": "results",
-            "optimizer": "adam",
-            "scheduler": {
-                "name": "ReduceLROnPlateau",
-                "kwargs": {
-                    "factor": 0.5,
-                    "patience": 20,
-                    "cooldown": 20,
-                    "minLr": 1e-5,
-                }
-            },
-        }
-
         self.lr: float
         self.epochs: int
         self.randomSeed: int
@@ -78,9 +69,6 @@ class TrainParamReader(basic_input):
         self.batchSize: int
         self.dataPath: str
 
-        for key in default_values:
-            self._use_default_warning(key, default_values[key])
-        print("")
 
 
 def createFn(fnName, pkgName: str):
@@ -112,11 +100,8 @@ def createFn(fnName, pkgName: str):
     ----------
 
     the above yaml file is equivalent to:
-    >>> fo = foo(
-    >>>     x = fx( 
-    >>>         a = f(a),
-    >>>         b=2
-    >>>     ),
+    >>> fo = abc.foo(
+    >>>     x = fx( a = fa(alpha = 1), b = 2 ),
     >>>     y = 3,
     >>>     z = 4,
     >>> )
