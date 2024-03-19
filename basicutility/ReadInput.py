@@ -70,8 +70,7 @@ class TrainParamReader(basic_input):
         self.dataPath: str
 
 
-
-def createFn(fnName, pkgName: str):
+def createFn(fnName, pkgName):
     """
     Create nested function/class from a dictionary
     example:
@@ -107,14 +106,34 @@ def createFn(fnName, pkgName: str):
     >>> )
     """
 
+    def getattr_multisource(pkgName, fnName):
+        try: 
+            iter(pkgName)
+        except TypeError:
+            pkgName = (pkgName,)
+
+        counter = 0
+        for i in pkgName:
+            try:
+                v = getattr(i, fnName)
+                return v
+            except AttributeError:
+                pass
+            counter += 1
+        if counter == len(pkgName):
+            raise AttributeError(
+                f"Could not find {fnName} in {tuple(i.__name__ for i in pkgName)}"
+            )
+
     if isinstance(fnName, dict):
         if "kwargs" in fnName:
-            for k in fnName["kwargs"]:
-                if isinstance(fnName["kwargs"][k], dict):
-                    fnName["kwargs"][k] = createFn(fnName["kwargs"][k], pkgName)
-            v = getattr(pkgName, fnName["name"])(**fnName["kwargs"])
+            if len(fnName["kwargs"]) > 0:
+                for k in fnName["kwargs"]:
+                    if isinstance(fnName["kwargs"][k], dict):
+                        fnName["kwargs"][k] = createFn(fnName["kwargs"][k], pkgName)
+            v = getattr_multisource(pkgName, fnName["name"])(**fnName["kwargs"])
         else:
-            v = getattr(pkgName, fnName["name"])
+            v = getattr_multisource(pkgName, fnName["name"])
     else:
-        v = getattr(pkgName, fnName)
+        v = getattr_multisource(pkgName, fnName)
     return v
