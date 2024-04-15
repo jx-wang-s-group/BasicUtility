@@ -2,8 +2,9 @@
 Common utilities (e.g. input parameter reading) for Sci-ML jobs
 
 ## Installation
+### install/update to the latest version
 ```bash
-pip install git+https://github.com/jx-wang-s-group/BasicUtility
+pip install --upgrade git+https://github.com/jx-wang-s-group/BasicUtility
 ```
 
 ## Usage
