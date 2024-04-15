@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "basicutility"
-version = "0.0.2"
+version = "0.0.3"
 authors = [
-  { name="Xinyang", email="xliu28@nd.edu" },
+  { name="Xin-Yang Liu", email="xliu28@nd.edu" },
 ]
 description = "Common utilities (e.g. input parameter reading) for Sci-ML jobs"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: Linux",
