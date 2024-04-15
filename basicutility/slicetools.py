@@ -9,7 +9,7 @@ def indices2slice(indices: Sequence[str|Sequence[int]], axis: Sequence[int]) -> 
     
     Example
     ------
-    >>> indices2slice([[1,2],["3:-1:2"]], [1,3])
+    >>> indices2slice([[1,2],"3:-1:2"], [1,3])
     [slice(None), sliceslice(1, 2, None), slice(None), slice(3, -1, 2)]
     # the output is equivalent to: arr[:, [1,2], :, 3:-1:2], arr is a numpy array
     """
