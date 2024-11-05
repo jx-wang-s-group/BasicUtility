@@ -10,7 +10,7 @@ authors = [
 ]
 description = "Common utilities (e.g. input parameter reading) for Sci-ML jobs"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.8"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: Linux",
